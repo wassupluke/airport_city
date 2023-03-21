@@ -85,29 +85,28 @@ def find_coin():
 
 def send_planes():
     print('running send_planes')
-    for _ in range(3):
-        plane = pyautogui.locateOnScreen('ready_plane.png', confidence=0.65)
-        if plane is not None:  # checks that a plane is ready to send
-            pyautogui.moveTo(plane[0] + 7, plane[1] + 7)
+    plane = pyautogui.locateOnScreen('ready_plane.png', confidence=0.65)
+    if plane is not None:  # checks that a plane is ready to send
+        pyautogui.moveTo(plane[0] + 7, plane[1] + 7)
+        click()
+        # FUTURE FEATURE: compares fuel/pass required to available supply
+        depart = pyautogui.locateOnScreen('depart.png', confidence=0.8)
+        if depart is not None:  # checks that plane can depart
+            pyautogui.moveTo(depart[0] + 30, depart[1] + 30)
             click()
-            # FUTURE FEATURE: compares fuel/pass required to available supply
-            depart = pyautogui.locateOnScreen('depart.png', confidence=0.8)
-            if depart is not None:  # checks that plane can depart
-                pyautogui.moveTo(depart[0] + 30, depart[1] + 30)
-                click()
-                bad_reqs = pyautogui.locateOnScreen('departure_reqs_not_met.png', confidence=0.7)
-                if bad_reqs is not None:
-                    pyautogui.press('esc')
-                    sleep(0.2)
-                    pyautogui.press('esc')
-        # COLLECT PILOT CAPS
-        print('finding caps')
-        caps = ['pilot_cap.png', 'pilot_cap2.png', 'pilot_cap3.png']
-        for c in caps:
-            cap = pyautogui.locateOnScreen(c, confidence=0.75)
-            if cap is not None:  # checks for pilot caps on landed planes
-                pyautogui.moveTo(cap[0] + 5, cap[1] + 8)
-                click()
+            bad_reqs = pyautogui.locateOnScreen('departure_reqs_not_met.png', confidence=0.7)
+            if bad_reqs is not None:
+                pyautogui.press('esc')
+                sleep(0.2)
+                pyautogui.press('esc')
+    # COLLECT PILOT CAPS
+    print('finding caps')
+    caps = ['pilot_cap.png', 'pilot_cap2.png', 'pilot_cap3.png']
+    for c in caps:
+        cap = pyautogui.locateOnScreen(c, confidence=0.75)
+        if cap is not None:  # checks for pilot caps on landed planes
+            pyautogui.moveTo(cap[0] + 5, cap[1] + 8)
+            click()
 
     
 def guest_planes():
@@ -196,7 +195,7 @@ def cargo_container():
                 
 
 def click():
-    print('running click')
+    print('click')
     pydirectinput.mouseDown()  # clicks the mouse
     sleep(0.01)
     pydirectinput.mouseUp()
@@ -210,7 +209,7 @@ def list_window_names():  # Prints names of all active windows
 
 
 pyautogui.FAILSAFE = True
-# fail-safe triggers from mouse moving to a corner of the screen
+# fail-safe triggers from mouse moving to the top left corner of the screen
 while True:
     for _ in range(10):
         main()
