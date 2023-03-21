@@ -34,12 +34,15 @@ def main():
     print('::::::::::::')
     congratulations()
     print('::::::::::::')
+    end()
+    print('::::::::::::')
 
 
 def find_focus():
     print('running find_focus')
     title = '🛩 Version 8.31.24 | SupportID: 20KPQFMVY ‎- Airport City'
-    '''NOTE: Title may need revised if game version updates
+    # VERY IMPORTANT NOTE:
+    '''Title may need revised if game version updates
     use the list_window_names function to see titles of all
     open windows'''
     hwnd = win32gui.FindWindow(None, title)  # locates game
@@ -171,6 +174,14 @@ def congratulations():
         pyautogui.press('esc')
 
 
+def end():
+    print('running end')
+    pyautogui.press('esc')
+    confirm_quit = pyautogui.locateOnScreen('quit.png', confidence=0.8)
+    if confirm_quit is not None:
+        pyautogui.press('esc')
+    
+
 def cargo_container():
     print('running cargo_container')
     cargo = pyautogui.locateOnScreen('cargo_container_icon.png',
@@ -212,5 +223,4 @@ pyautogui.FAILSAFE = True
 while True:
     for _ in range(10):
         main()
-        pyautogui.press('esc')
     cargo_container()
