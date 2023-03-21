@@ -1,15 +1,14 @@
 # TODO add feature in send planes
-'''Here I have added functionality that will locate the game window and bring it into
-focus before running subsequent lines of code. This will avoid the necessity of using
-a sleep time while you click over to it. Disregard the find_focus feature if you plan
-to continue using the 'q' keypress to activate your program from in-game.
+'''Here I have added functionality that locates the game window and brings it
+into focus before running subsequent lines of code. This will avoid the
+necessity of using a sleep time while you click over to it.
 
-The pydirectinput.click() feature works beatifully. Use this in tandem with your
+The pydirectinput click feature works beatifully. Use this in tandem with your
 pyautogui.LocateOnScreen function for best results.
 
-The pyautogui documentation recommends enabling their failsafe feature to avoid the code
-running a muck. Moving the mouse to any corner of the screen will abort the python
-program.'''
+The pyautogui documentation recommends enabling their failsafe feature to avoid
+the code running a muck. Moving the mouse to any corner of the screen will
+abort the python program.'''
 
 import win32gui
 import pyautogui
@@ -59,11 +58,12 @@ def find_suitcase():
             pyautogui.moveTo(suitcase[0] + 8, suitcase[1] + 8)
             click()
             sleep(0.25)
-            full = pyautogui.locateOnScreen('terminal_full.png', confidence=0.8)
+            full = pyautogui.locateOnScreen('terminal_full.png',
+                                            confidence=0.8)
             if full is not None:
                 pyautogui.press('esc')
                 break
-            
+
 
 def find_coin():
     print('running find_coin')
@@ -77,7 +77,7 @@ def find_coin():
                 pyautogui.moveTo(coin[0] + 8, coin[1] + 8)
                 click()
                 sleep(0.3)
-    
+
 
 def send_planes():
     print('running send_planes')
@@ -90,7 +90,8 @@ def send_planes():
         if depart is not None:  # checks that plane can depart
             pyautogui.moveTo(depart[0] + 30, depart[1] + 30)
             click()
-            bad_reqs = pyautogui.locateOnScreen('departure_reqs_not_met.png', confidence=0.7)
+            bad_reqs = pyautogui.locateOnScreen('departure_reqs_not_met.png',
+                                                confidence=0.7)
             if bad_reqs is not None:
                 pyautogui.press('esc')
                 sleep(0.2)
@@ -103,7 +104,7 @@ def send_planes():
             pyautogui.moveTo(cap[0] + 5, cap[1] + 8)
             click()
 
-    
+
 def guest_planes():
     print('running guest_planes')
     # LAND GUEST PLANES
@@ -114,17 +115,19 @@ def guest_planes():
         sleep(0.4)
         for _ in range(2):
             reqs = pyautogui.locateOnScreen('landing_reqs.png', confidence=0.8)
-            bad_reqs = pyautogui.locateOnScreen('landing_reqs_not_met.png', confidence=0.8)
+            bad_reqs = pyautogui.locateOnScreen('landing_reqs_not_met.png',
+                                                confidence=0.8)
             if reqs is not None:  # checks that planes can land
                 pyautogui.moveTo(reqs[0] + 250, reqs[1] + 15)
                 click()
-                attn = pyautogui.locateOnScreen('land_planes_in_queue.png', confidence=0.8)
+                attn = pyautogui.locateOnScreen('land_planes_in_queue.png',
+                                                confidence=0.8)
                 if attn is not None:  # checks for full landing queue
                     pyautogui.press('esc')
-            elif bad_reqs is not None:  # checks for unmet landing reqs and declines
+            elif bad_reqs is not None:  # checks for unmet landing reqs
                 pyautogui.moveTo(bad_reqs[0] + 250, bad_reqs[1] + 75)
                 click()
-            else:  
+            else:
                 pyautogui.press('esc', presses=2)
                 break
 
@@ -160,7 +163,7 @@ def collections():
                 pyautogui.moveTo(collect[0] + 8, collect[1] + 8)
                 click()
 
-    
+
 def congratulations():
     print('looking for congratulations')
     congrats = pyautogui.locateOnScreen('congratulations.png', confidence=0.9)
@@ -170,11 +173,13 @@ def congratulations():
 
 def cargo_container():
     print('running cargo_container')
-    cargo = pyautogui.locateOnScreen('cargo_container_icon.png', confidence=0.9)
+    cargo = pyautogui.locateOnScreen('cargo_container_icon.png',
+                                     confidence=0.9)
     if cargo is not None:
         pyautogui.moveTo(cargo[0] + 8, cargo[1] + 8)
         click()
-        container = pyautogui.locateOnScreen('cargo_container.png', confidence=0.8)
+        container = pyautogui.locateOnScreen('cargo_container.png',
+                                             confidence=0.8)
         if container is not None:
             pyautogui.moveTo(container)
             click()
@@ -186,7 +191,7 @@ def cargo_container():
                 congratulations()
                 sleep(0.1)
                 pyautogui.press('esc')
-                
+
 
 def click():
     print('click')
@@ -209,6 +214,3 @@ while True:
         main()
         pyautogui.press('esc')
     cargo_container()
-
-
-    
