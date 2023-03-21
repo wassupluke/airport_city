@@ -56,7 +56,6 @@ def find_suitcase():
             'suitcase_sm2.png',
             'suitcase_sm3.png']
     for png in pngs:
-        print(f'finding {png}')
         suitcase = pyautogui.locateOnScreen(png, confidence=0.45)
         if suitcase is not None:
             pyautogui.moveTo(suitcase[0] + 8, suitcase[1] + 8)
@@ -74,7 +73,6 @@ def find_coin():
             'coin_sm.png',
             'coin_sm1.png']
     for png in pngs:
-        print(f'finding {png}')
         for _ in range(3):
             coin = pyautogui.locateOnScreen(png, confidence=0.5)
             if coin is not None:
