@@ -19,8 +19,6 @@ from time import sleep
 
 
 def main():
-    print('running main')
-    print('::::::::::::')
     find_focus()
     print('::::::::::::')
     find_suitcase()
@@ -98,7 +96,6 @@ def send_planes():
                 sleep(0.2)
                 pyautogui.press('esc')
     # COLLECT PILOT CAPS
-    print('finding caps')
     caps = ['pilot_cap.png', 'pilot_cap2.png', 'pilot_cap3.png']
     for c in caps:
         cap = pyautogui.locateOnScreen(c, confidence=0.75)
@@ -159,7 +156,6 @@ def collections():
         buttons = ['collect.png', 'collect2.png']
         for button in buttons:
             collect = pyautogui.locateOnScreen(button, confidence=0.9)
-            print(collect)
             if collect is not None:
                 pyautogui.moveTo(collect[0] + 8, collect[1] + 8)
                 click()
